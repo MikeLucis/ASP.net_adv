@@ -46,15 +46,21 @@
 
                             <button type="submit" class="btn btn-primary btn-block">Log In</button>
                         </form>
-                        @ViewBag.msg
                     </div>
                     <div class="card-footer text-muted text-center">
-                        New to Django Boards? <a href="/signup/">Sign Up</a>
+                        New Account? <a href="/Home/Register">Sign Up</a>
                     </div>
                 </div>
                 <div class="text-center py-2">
                     <small>
-                        <a href="/reset/" class="text-muted">Forgot Your Password?</a>
+                        <a href="/" class="text-muted">Forgot Your Password?</a>
+                    </small><br />
+                    <small>
+                        <a href="/Home/Update/4" class="text-muted">ChangeYourInfo</a>
+                    </small>
+                    <br />
+                    <small>
+                        <p class="text-muted" style="color: rebeccapurple;">@ViewBag.msg</p>
                     </small>
                 </div>
             </div>
