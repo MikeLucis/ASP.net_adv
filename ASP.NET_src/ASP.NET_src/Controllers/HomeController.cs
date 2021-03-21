@@ -10,7 +10,7 @@ using ASP.NET_src.Models;
 
 namespace ASP.NET_src.Controllers
 {
-    //实现验证控件-TODO
+    //todo: 控件验证
 //    [HttpPost]
 //    public ActionResult Edit(User user)
 //    {
@@ -22,20 +22,30 @@ namespace ASP.NET_src.Controllers
 
     public class HomeController : Controller
     {
+
         //Home默认页视图函数
+        /// <summary>
+        /// 请求返回页
+        /// </summary>
+        /// <returns>View.Index</returns>
         [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
 
+        /// <summary>
+        /// 提交返回页(添加确认信息)
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns>View.Index + ViewBag.msg</returns>
         [HttpPost]
         public ActionResult Index(string username, string password)
         {
-            //使用@foreach-TODO
             if (username == "" && password == "")
             {
-                ViewBag.msg = false;
+                ViewBag.msg = null;
             }
             else
             {
@@ -53,12 +63,21 @@ namespace ASP.NET_src.Controllers
 
 
         //Home注册页视图函数
+        /// <summary>
+        /// 请求返回页
+        /// </summary>
+        /// <returns>View.Register</returns>
         [HttpGet]
         public ActionResult Register()
         {
-            return View();
+            return View("Register");
         }
 
+        /// <summary>
+        /// 提交返回页(向表插入数据并添加确认信息)
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns>View.Register + SQL-Insert + ViewBag.msg</returns>
         [HttpPost]
         public ActionResult Register(User user)
         {
@@ -73,15 +92,19 @@ namespace ASP.NET_src.Controllers
                 else
                 {
                     ViewBag.msg = "Error !!";
+                    ViewBag.flag = false;
                 }
-
-                
             }
-                return View();
+                return View("RegisterResult");
         }
 
 
         //Home更改页视图函数
+        /// <summary>
+        /// 请求返回页(表单显示数据)
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns>View.Update + SQL-Select + ViewData</returns>
         [HttpGet]
         public ActionResult Update(int ID)
         {
@@ -93,9 +116,15 @@ namespace ASP.NET_src.Controllers
 
             ViewData["UserInfo"] = info;
 
-            return View();
+            return View("Update");
         }
 
+        /// <summary>
+        /// 提交返回页(向表更新数据并添加确认信息)
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <param name="reg"></param>
+        /// <returns>View.UpdateResult + SQL-Update + ViewBag</returns>
         [HttpPost]
         public ActionResult Update(int ID, User reg)
         {
@@ -110,8 +139,8 @@ namespace ASP.NET_src.Controllers
                 else
                 {
                     ViewBag.msg = "Error !!";
+                    ViewBag.flag = false;
                 }
-
             }
             return View("UpdateResult");
         }

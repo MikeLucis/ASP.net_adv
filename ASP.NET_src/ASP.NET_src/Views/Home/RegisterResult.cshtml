@@ -3,15 +3,43 @@
 }
 
 <!DOCTYPE html>
-
-<html>
+<html lang="zh-cn">
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>RegisterResult</title>
+    <title>Register</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="~/static/css/basic.css">
+    <link rel="stylesheet" href="~/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/static/css/simplemde.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <div>
-    @ViewBag.msg
+    <div class="container">
+        <h1 class="text-center logo my-4">
+            My MVC
+        </h1>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10 col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title text-center">@ViewBag.msg</h3>
+
+                        @if (ViewBag.flag == false)
+                        {
+                            <p class="logo text-center">请检查您的SQL语句及视图函数</p>
+                        }
+                        
+                    </div>
+                    <div class="card-footer text-muted text-center">
+                        Already Have an Account? <a href="/">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
+
+
 </html>
+
