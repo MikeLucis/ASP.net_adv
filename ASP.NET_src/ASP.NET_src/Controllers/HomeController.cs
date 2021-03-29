@@ -28,38 +28,38 @@ namespace ASP.NET_src.Controllers
         /// 请求返回页
         /// </summary>
         /// <returns>View.Index</returns>
-        [HttpGet]
-        public ActionResult Index()
-        {
-            return View();
-        }
+        //[HttpGet]
+        //public ActionResult Index()
+        //{
+        //    return View();
+        //}
 
-        /// <summary>
-        /// 提交返回页(添加确认信息)
-        /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <returns>View.Index + ViewBag.msg</returns>
-        [HttpPost]
-        public ActionResult Index(string username, string password)
-        {
-            if (username == "" && password == "")
-            {
-                ViewBag.msg = null;
-            }
-            else
-            {
-                if (username == "abc" && password == "123")
-                {
-                    ViewBag.msg = ("Finish!!");
-                }
-                else
-                {
-                    ViewBag.msg = ("Error!");
-                } 
-            }
-            return View();
-        }
+        ///// <summary>
+        ///// 提交返回页(添加确认信息)
+        ///// </summary>
+        ///// <param name="username"></param>
+        ///// <param name="password"></param>
+        ///// <returns>View.Index + ViewBag.msg</returns>
+        //[HttpPost]
+        //public ActionResult Index(string username, string password)
+        //{
+        //    if (username == "" && password == "")
+        //    {
+        //        ViewBag.msg = null;
+        //    }
+        //    else
+        //    {
+        //        if (username == "abc" && password == "123")
+        //        {
+        //            ViewBag.msg = ("Finish!!");
+        //        }
+        //        else
+        //        {
+        //            ViewBag.msg = ("Error!");
+        //        } 
+        //    }
+        //    return View();
+        //}
 
 
         //Home注册页视图函数
@@ -142,7 +142,21 @@ namespace ASP.NET_src.Controllers
                     ViewBag.flag = false;
                 }
             }
-            return View("UpdateResult");
+            //return View("UpdateResult");
+            return View();
+        }
+
+        public ActionResult Index()
+        {
+            var con = new SqlConnection(ConfigurationManager.ConnectionStrings["SQL"].ConnectionString);
+
+            string cmd = $"Select * From dbo.Register";
+
+            var InfoList = con.Query<User>(cmd);
+
+            ViewData["UserInfo"] = InfoList;
+
+            return View();
         }
     }
 }

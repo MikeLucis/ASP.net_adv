@@ -8,6 +8,7 @@ namespace ASP.NET_src.Models
 {
     public class User
     {
+        public int ID { get; set; }
         //[Required(ErrorMessage = "请输入收件人姓名")]
         //[Display(Name = "用户名")]
         public string UserName { get; set; }

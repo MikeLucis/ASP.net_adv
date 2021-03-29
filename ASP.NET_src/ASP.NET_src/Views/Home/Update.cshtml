@@ -1,8 +1,17 @@
 ﻿@using ASP.NET_src.Models;
 
 @{
+    var UserInfo = new User();
+
     Layout = null;
-    var UserInfo = ViewData["UserInfo"] as User;
+
+    if (ViewData["UserInfo"] != null)
+    {
+       UserInfo = (User)ViewData["UserInfo"];
+    }
+
+    @*var UserInfo = ViewData["UserInfo"] as User;*@ 
+    // 新建对象备赋值
 }
 
 <!DOCTYPE html>
