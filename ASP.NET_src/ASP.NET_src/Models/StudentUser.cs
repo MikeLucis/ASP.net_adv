@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ASP.NET_src.Models
 {
-    public class User
+    public class StuUser
     {
         public int ID { get; set; }
         //[Required(ErrorMessage = "请输入收件人姓名")]

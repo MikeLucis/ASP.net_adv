@@ -1,13 +1,13 @@
 ﻿@using ASP.NET_src.Models;
 
 @{
-    var UserInfo = new User();
+    var UserInfo = new StuUser();
 
     Layout = null;
 
     if (ViewData["UserInfo"] != null)
     {
-       UserInfo = (User)ViewData["UserInfo"];
+        UserInfo = (StuUser)ViewData["UserInfo"];
     }
 
     @*var UserInfo = ViewData["UserInfo"] as User;*@ 
@@ -31,7 +31,7 @@
 <body>
     <div class="container">
         <h1 class="text-center logo my-4">
-            My MVC
+            <a href="/Home">My MVC</a>
         </h1>
 
         <div class="row justify-content-center">

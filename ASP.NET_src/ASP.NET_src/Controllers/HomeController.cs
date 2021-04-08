@@ -12,7 +12,7 @@ namespace ASP.NET_src.Controllers
 {
     //todo: 控件验证
 //    [HttpPost]
-//    public ActionResult Edit(User user)
+//    public ActionResult Edit(StuUser user)
 //    {
 //        if (ModelState.)
 //        {
@@ -79,11 +79,11 @@ namespace ASP.NET_src.Controllers
         /// <param name="user"></param>
         /// <returns>View.Register + SQL-Insert + ViewBag.msg</returns>
         [HttpPost]
-        public ActionResult Register(User user)
+        public ActionResult Register(StuUser user)
         {
             using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["SQL"].ConnectionString))
             {
-                string cmd = "Insert into Register(UserName, Email, PhoneNum, ConfimPassWords) Values(@UserName, @Email, @PhoneNum, @ConfimPassWords)";
+                string cmd = "Insert into StudentRegister(UserName, Email, PhoneNum, ConfimPassWords) Values(@UserName, @Email, @PhoneNum, @ConfimPassWords)";
                 int i = con.Execute(cmd, user);
                 if (i > 0)
                 {
@@ -110,9 +110,9 @@ namespace ASP.NET_src.Controllers
         {
             var con = new SqlConnection(ConfigurationManager.ConnectionStrings["SQL"].ConnectionString);
 
-            string cmd = $"Select * From dbo.Register Where ID = {ID}";
+            string cmd = $"Select * From dbo.StudentRegister Where ID = {ID}";
 
-            var info = con.Query<User>(cmd).SingleOrDefault();
+            var info = con.Query<StuUser>(cmd).SingleOrDefault();
 
             ViewData["UserInfo"] = info;
 
@@ -126,11 +126,11 @@ namespace ASP.NET_src.Controllers
         /// <param name="reg"></param>
         /// <returns>View.UpdateResult + SQL-Update + ViewBag</returns>
         [HttpPost]
-        public ActionResult Update(int ID, User reg)
+        public ActionResult Update(int ID, StuUser reg)
         {
             using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["SQL"].ConnectionString))
             {
-                string cmd = $"Update dbo.Register SET UserName = @UserName, Email = @Email, PhoneNum = @PhoneNum, ConfimPassWords = @ConfimPassWords Where (ID = {ID})";
+                string cmd = $"Update dbo.StudentRegister SET UserName = @UserName, Email = @Email, PhoneNum = @PhoneNum, ConfimPassWords = @ConfimPassWords Where (ID = {ID})";
                 int i = con.Execute(cmd, reg);
                 if (i > 0)
                 {
@@ -150,13 +150,38 @@ namespace ASP.NET_src.Controllers
         {
             var con = new SqlConnection(ConfigurationManager.ConnectionStrings["SQL"].ConnectionString);
 
-            string cmd = $"Select * From dbo.Register";
+            string cmd = $"Select * From dbo.StudentRegister";
 
-            var InfoList = con.Query<User>(cmd);
+            var InfoList = con.Query<StuUser>(cmd);
 
             ViewData["UserInfo"] = InfoList;
 
             return View();
+        }
+
+        public ActionResult Delete(int ID)
+        {
+            var con = new SqlConnection(ConfigurationManager.ConnectionStrings["SQL"].ConnectionString);
+
+            var info = new StuUser();
+
+            info.ID = ID;
+
+            string cmd = $"Delete From dbo.StudentRegister Where ID=@ID";
+
+            int i = con.Execute(cmd, info);
+
+            if (i > 0)
+            {
+                ViewBag.msg = "Finish !!";
+            }
+            else
+            {
+                ViewBag.msg = "Error !!";
+                ViewBag.flag = false;
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }

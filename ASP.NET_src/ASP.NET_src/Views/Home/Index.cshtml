@@ -1,6 +1,6 @@
 ﻿@using ASP.NET_src.Models;
 @{
-    var InfoList = (List<User>)ViewData["UserInfo"];
+    var InfoList = (List<StuUser>)ViewData["UserInfo"];
 
     Layout = null;
 }
@@ -21,7 +21,7 @@
 
     <div class="container">
         <h1 class="text-center logo my-4">
-        My MVC
+        <a href="/Home">My MVC</a>
         </h1>
 
         <div class="row justify-content-center">
@@ -60,17 +60,19 @@
                             <td>PhoneNum</td>
                             <td>ConfimPassWords</td>
                             <td>Change</td>
+                            <td>Delete</td>
                             </thead>
                             <tbody class="table-striped">
                                 @for (int i = 0; i < InfoList.Count; i++)
                                 {
-                                    <tr>
-                                        <td>@InfoList[i].UserName</td>
-                                        <td>@InfoList[i].Email</td>
-                                        <td>@InfoList[i].PhoneNum</td>
-                                        <td>@InfoList[i].ConfimPassWords</td>
-                                        <td><a href="/Home/Update/@InfoList[i].ID">ChangeInfo</a></td>
-                                    </tr>
+                                <tr>
+                                    <td>@InfoList[i].UserName</td>
+                                    <td>@InfoList[i].Email</td>
+                                    <td>@InfoList[i].PhoneNum</td>
+                                    <td>@InfoList[i].ConfimPassWords</td>
+                                    <td><a href="/Home/Update/@InfoList[i].ID">ChangeInfo</a></td>
+                                    <td><a href="/Home/Delete/@InfoList[i].ID">DeleteInfo</a></td>
+                                </tr>
                                 }
                             </tbody>
                         </table>
@@ -82,11 +84,12 @@
                     </small><br />
                     <small>
                         <a href="/Home/Update/4" class="text-muted">ChangeYourInfo</a>
+                    </small><br />
+                    <small>
+                        <a href="/Teacher" class="text-muted">TeacherCreate</a>
                     </small>
                     <br />
-                    <small>
-                        <p style="color: rebeccapurple;">@ViewBag.msg</p>
-                    </small>
+                    <p style="color: rebeccapurple;">@ViewBag.msg</p>
                 </div>
             </div>
         </div>
